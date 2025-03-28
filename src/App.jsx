@@ -21,7 +21,7 @@ function App() {
     setLoading(true);
     
     try {
-      const response = await fetch("/api/serving-endpoints/mindmatever/invocations", {
+      const response = await fetch("https://adb-1068208383722178.18.azuredatabricks.net/serving-endpoints/mindmatever/invocations", {
         method: "POST",
         headers: {
           Authorization: "dapifd0541b27a0825c3491ba705bcde38a2",
