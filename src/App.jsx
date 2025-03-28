@@ -23,7 +23,7 @@ function App() {
       const response = await fetch("https://adb-1068208383722178.18.azuredatabricks.net/serving-endpoints/mindmatever/invocations", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: "Bearer dapie72d1da7d09196e0545ab16ee51cd515",
           "Content-Type": "application/json"
           
         },
