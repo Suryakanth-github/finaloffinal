@@ -106,6 +106,31 @@ def health_check():
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+import requests  # Add this import at the top if not already
+
+@app.route("/api/proxy", methods=["POST"])
+def proxy_to_databricks():
+    data = request.get_json()
+    text = data["text"]
+
+    headers = {
+        "Authorization": "Bearer dapifd0541b27a0825c3491ba705bcde38a2",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "inputs": {
+            "text": [text]
+        }
+    }
+
+    databricks_url = "https://adb-1068208383722178.18.azuredatabricks.net/serving-endpoints/mindmatever/invocations"
+    
+    try:
+        r = requests.post(databricks_url, headers=headers, json=payload)
+        return jsonify(r.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # ---------------- Run server ----------------
 if __name__ == "__main__":
