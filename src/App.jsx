@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 
 function App() {
@@ -15,6 +14,7 @@ function App() {
   const [mouthCues, setMouthCues] = useState(null);
   const [listening, setListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
+  const token = import.meta.env.VITE_DATABRICKS_TOKEN;
 
   const handleSend = async () => {
     if (!userText.trim()) return;
@@ -24,9 +24,7 @@ function App() {
       const response = await fetch("/api/serving-endpoints/mindmatever/invocations", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.REACT_APP_DATABRICKS_TOKEN}`,
-
-
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
           
         },
@@ -108,7 +106,7 @@ function App() {
     synth.speak(utter);
   };
   
-  
+
   return (
     <>
       <Canvas shadows camera={{ position: [0, 0, 8], fov: 42 }}>
