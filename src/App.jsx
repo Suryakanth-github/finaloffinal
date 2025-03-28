@@ -14,22 +14,26 @@ function App() {
   const [mouthCues, setMouthCues] = useState(null);
   const [listening, setListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
- 
+  const token = import.meta.env.VITE_DATABRICKS_TOKEN;
 
   const handleSend = async () => {
     if (!userText.trim()) return;
     setLoading(true);
     
     try {
-   
-      const response = await fetch("https://adb-1068208383722178.18.azuredatabricks.net/serving-endpoints/mindmatever/invocations", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ text: userText })
-});
-
+      const response = await fetch("/api/serving-endpoints/mindmatever/invocations", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+          
+        },
+        body: JSON.stringify({
+          inputs: {
+            text: [userText]
+          }
+        })
+      });  
       const data = await response.json();
       const [emotion, backendReply] = data.predictions[0];
       setReply(backendReply);
