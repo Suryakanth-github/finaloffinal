@@ -4,14 +4,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassifica
 from sklearn.preprocessing import LabelEncoder
 import torch
 
-from huggingface_hub import login
-import os
-from dotenv import load_dotenv
-
-load_dotenv()  # Load environment variables from .env
-
-HUGGINGFACE_TOKEN = os.getenv("HUGGINGFACE_TOKEN")
-
+HUGGINGFACE_TOKEN = "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"
 
 
 # print(HUGGINGFACE_TOKEN)  # Test if the token loads correctly
