@@ -21,19 +21,15 @@ function App() {
     setLoading(true);
     
     try {
+   
       const response = await fetch("https://adb-1068208383722178.18.azuredatabricks.net/serving-endpoints/mindmatever/invocations", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer dapifd0541b27a0825c3491ba705bcde38a2",
-          "Content-Type": "application/json"
-          
-        },
-        body: JSON.stringify({
-          inputs: {
-            text: [userText]
-          }
-        })
-      });  
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ text: userText })
+});
+
       const data = await response.json();
       const [emotion, backendReply] = data.predictions[0];
       setReply(backendReply);
